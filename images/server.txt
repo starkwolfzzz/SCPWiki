@@ -1,0 +1,7 @@
+None = https://i.imgur.com/B9mOKMh.png
+Euclid = https://i.imgur.com/Gyzmbrg.png
+Safe = https://i.imgur.com/qXCFy9m.png
+Keter = https://i.imgur.com/eegUfWp.png
+Esoteric = https://i.imgur.com/InP1u5p.png
+Thaumiel = https://i.imgur.com/rvucrXT.png
+Neutralized = https://i.imgur.com/F33iZxV.png
