@@ -8,8 +8,8 @@ module.exports = {
             const uptimeTS = client.uptime;
 
             const msgEmbed = new MessageEmbed()
-                .setColor("F9A602")
-                .setTitle("Tavern Bartender Uptime")
+                .setColor("FFFFFF")
+                .setTitle("SCP Wiki Uptime")
                 .setDescription(`The bot has been up for ${msToTime(uptimeTS, "highest")}.`)
                 .addFields({
                     name: 'Days',
@@ -30,7 +30,7 @@ module.exports = {
                 }, )
                 .addField('Milliseconds', `${msToTime(uptimeTS, "milliseconds")}`, true)
                 .setTimestamp()
-                .setFooter(`${msToTime(uptimeTS)}`)
+                .setFooter({text:`${msToTime(uptimeTS)}`})
             message.reply({ embeds: [msgEmbed] });
         }
     }

@@ -1,1 +1,2 @@
-# SCPWiki
+# TavernBartender
+TavernBartender Discord Bot

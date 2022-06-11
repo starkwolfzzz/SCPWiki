@@ -5,8 +5,8 @@ module.exports = {
     description: "Replies with the latency of the bot",
     async execute(client, interaction) {
         const msgEmbed1 = new MessageEmbed()
-        .setColor("F9A602")
-        .setTitle("Tavern Bartender Ping")
+        .setColor("FFFFFF")
+        .setTitle("SCP Wiki Ping")
         .setDescription(`Checking for bot ping...`)
         .setTimestamp()
 
@@ -17,8 +17,8 @@ module.exports = {
         const apiLatency = Math.round(client.ws.ping)
 
         const msgEmbed = new MessageEmbed()
-        .setColor("F9A602")
-        .setTitle("Tavern Bartender Ping")
+        .setColor("FFFFFF")
+        .setTitle("SCP Wiki Ping")
         .setDescription(`🏓 pong`)
         .addFields({
             name: 'Latency',
@@ -26,7 +26,7 @@ module.exports = {
         }, )
         .addField('Api Latency', `${apiLatency} ms`)
         .setTimestamp()
-        .setFooter(`${latency} ms`)
+        .setFooter({text:`${latency} ms`})
 
         interaction.editReply({ embeds: [msgEmbed]})
     }
