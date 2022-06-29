@@ -2,7 +2,7 @@ const config = require("../../../config.json");
 const { Client } = require(`discord.js`);
 const express = require("express");
 const app = express();
-var mysql = require("mysql");
+var mysql = require("mysql-await");
 
 var errors = "";
 
@@ -155,6 +155,7 @@ module.exports = {
         if (err) throw err;
         console.info("Database \x1b[32mConnected\x1b[0m!");
       });
+
       client.db = db;
     });
 
