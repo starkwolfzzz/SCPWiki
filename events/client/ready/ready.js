@@ -143,8 +143,10 @@ module.exports = {
       if (client.devMode)
         console.info("Development Mode is \x1b[32mEnabled\x1b[0m!");
 
+      var host = client.devMode ? "130.61.140.70" : "172.18.0.1";
+
       var db = mysql.createConnection({
-        host: "130.61.140.70",
+        host: host,
         user: "u13_GrpgZwOYe8",
         password: "BjY^oTsSbRWL5!YABalE5YC+",
         database: "s13_Main_SCP",
