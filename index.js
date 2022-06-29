@@ -27,7 +27,7 @@ const client = new Client({
 const fs = require('fs');
 const path = require('path');
 
-if(fs.existsSync("./dev")){
+if(fs.existsSync("./.dev")){
     client.devMode = true;
 }
 
