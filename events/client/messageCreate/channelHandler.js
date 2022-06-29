@@ -59,7 +59,7 @@ module.exports = {
               )}`;
               var queryResult = await client.db.awaitQuery(scpQuery);
 
-              if (queryResult) {
+              if (queryResult[0]) {
                 queryResult = queryResult[0];
                 const itemNo = `SCP-${pad(queryResult.Number, 3)}`;
                 const itemUrl = queryResult.URL;
