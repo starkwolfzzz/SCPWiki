@@ -52,14 +52,15 @@ module.exports = {
       var sizeW = size - 1;
       var n = 0;
       for (i = 0; i < size; i++) {
+        const mainGuild = client.devMode
+          ? client.guilds.cache.get(process.env["GUILD_ID"])
+          : client.guilds.cache.get(
+              client.guilds.cache.map((guild) => guild.id)[i]
+            );
+
         if (client.devMode) {
-          mainGuild = client.guilds.cache.get(process.env["GUILD_ID"]);
           i = size;
           n = sizeW;
-        } else {
-          mainGuild = client.guilds.cache.get(
-            client.guilds.cache.map((guild) => guild.id)[i]
-          );
         }
 
         mainGuild.commands
