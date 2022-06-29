@@ -27,6 +27,10 @@ const client = new Client({
 const fs = require('fs');
 const path = require('path');
 
+if(fs.existsSync("./dev")){
+    client.devMode = true;
+}
+
 function changeConfig(data) {
     let filePath = "./config.json";
     return new Promise((resolve, reject) => {
