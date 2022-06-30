@@ -69,18 +69,15 @@ module.exports = {
                 var itemClassColor = queryResult.ClassColor;
                 var itemImage = queryResult.Image;
 
-                var itemDescriptionSegmnt = queryResult.Description.substring(
-                  0,
-                  1024
-                );
-                var fullItemDescriptionSegmnt = queryResult.Description;
-                var bigDesc = queryResult.Description.length > 1024;
+                var itemDescriptionSegmnt = queryResult.Description.replace(/%60/g, "'").substring(0, 1024);
+                var fullItemDescriptionSegmnt = queryResult.Description.replace(/%60/g, "'");
+                var bigDesc = queryResult.Description.replace(/%60/g, "'").length > 1024;
 
                 const itemSpecialContainmentProc =
-                  queryResult.ContainmentProcedures.substring(0, 1024);
+                  queryResult.ContainmentProcedures.replace(/%60/g, "'").substring(0, 1024);
                 const fullItemSpecialContainmentProc =
-                  queryResult.ContainmentProcedures;
-                var bigCont = queryResult.ContainmentProcedures.length > 1024;
+                  queryResult.ContainmentProcedures.replace(/%60/g, "'");
+                var bigCont = queryResult.ContainmentProcedures.replace(/%60/g, "'").length > 1024;
 
                 var itemFullFootNotes = queryResult.Footnotes;
                 var itemFootNotes = "";
