@@ -74,13 +74,13 @@ module.exports = {
                   1024
                 );
                 var fullItemDescriptionSegmnt = queryResult.Description;
-                var bigDesc = queryResult.Description.length > 1;
+                var bigDesc = queryResult.Description.length > 1024;
 
                 const itemSpecialContainmentProc =
                   queryResult.ContainmentProcedures.substring(0, 1024);
                 const fullItemSpecialContainmentProc =
                   queryResult.ContainmentProcedures;
-                var bigCont = queryResult.ContainmentProcedures.length > 1;
+                var bigCont = queryResult.ContainmentProcedures.length > 1024;
 
                 var itemFullFootNotes = queryResult.Footnotes;
                 var itemFootNotes = "";
