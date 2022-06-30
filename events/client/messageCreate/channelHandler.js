@@ -783,7 +783,8 @@ module.exports = {
                         itemImage = "";
                         itemDescriptionSegmnt =
                           "**GENERAL NOTICE 001-Alpha**: In order to prevent knowledge of SCP-001 from being leaked, several/no false SCP-001 files have been created alongside the true file/files. All files concerning the nature of SCP-001, including the decoy/decoys, are protected by a memetic kill agent designed to immediately cause cardiac arrest in any nonauthorized personnel attempting to access the file. Revealing the true nature/natures of SCP-001 to the general public is cause for execution, except as required under ████-███-██████.";
-                        break;
+                        fullItemDescriptionSegmnt = itemDescriptionSegmnt;
+                          break;
                       case "https://the-scp.foundation/object/scp-2718":
                         itemClassImg =
                           "https://the-scp.foundation/assets/images/template/esoteric.svg";
