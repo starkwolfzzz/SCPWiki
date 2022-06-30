@@ -984,13 +984,13 @@ module.exports = {
                                 var query = `INSERT INTO Scps (URL, Image, Number, Name, Class, ClassColor, ClassImage, Description, ContainmentProcedures, Tags, Footnotes) VALUES ('${itemUrl}', '${itemImage}', '${actualItemNo}', '${itemName.replaceAll(
                                   /'/g,
                                   "%60"
-                                )}', '${itemClass}', '${itemClassColor}', '${itemClassImg}', '${fullItemDescriptionSegmnt.replaceAll(
+                                )}', '${itemClass}', '${itemClassColor}', '${itemClassImg}', '${fullItemDescriptionSegmnt.replace(
                                   /'/g,
                                   "%60"
-                                )}', '${fullItemSpecialContainmentProc.replaceAll(
+                                )}', '${fullItemSpecialContainmentProc.replace(
                                   /'/g,
                                   "%60"
-                                )}', '${allTags}', '${itemFullFootNotes.replaceAll(
+                                )}', '${allTags}', '${itemFullFootNotes.replace(
                                   /'/g,
                                   "%60"
                                 )}')`;
