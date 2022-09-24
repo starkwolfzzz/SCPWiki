@@ -54,7 +54,7 @@ module.exports = {
         const mainGuild = client.devMode
           ? client.guilds.cache.get(process.env["GUILD_ID"])
           : client.guilds.cache.get(
-              client.guilds.cache.map((guild) => guild.id)[i]
+              client.guilds.cache.map((guild) => guild.id)[p]
             );
 
         if (client.devMode) {
