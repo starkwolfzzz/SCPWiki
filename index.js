@@ -1,8 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 25593;
-
-app.listen(port /*, () => console.log(`app listening at http://localhost:${port}`)*/ );
 
 // ================= START BOT CODE ===================
 

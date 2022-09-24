@@ -61,9 +61,9 @@ module.exports = {
 
               if (queryResult[0]) {
                 queryResult = queryResult[0];
-                const itemNo = `SCP-${pad(queryResult.Number, 3)}`;
-                const itemUrl = queryResult.URL;
-                const itemName = queryResult.Name;
+                var itemNo = `SCP-${pad(queryResult.Number, 3)}`;
+                var itemUrl = queryResult.URL;
+                var itemName = queryResult.Name;
                 var itemClass = queryResult.Class;
                 var itemClassImg = queryResult.ClassImage;
                 var itemClassColor = queryResult.ClassColor;
@@ -72,18 +72,20 @@ module.exports = {
                 var itemDescriptionSegmnt = queryResult.Description.replace(/%60/g, "'").substring(0, 1024);
                 var fullItemDescriptionSegmnt = queryResult.Description.replace(/%60/g, "'");
                 var bigDesc = queryResult.Description.replace(/%60/g, "'").length > 1024;
+                if(bigDesc) itemDescriptionSegmnt = itemDescriptionSegmnt.substring(0, itemDescriptionSegmnt.substring(0, 1021).lastIndexOf(" ")) + "...";
 
-                const itemSpecialContainmentProc =
+                var itemSpecialContainmentProc =
                   queryResult.ContainmentProcedures.replace(/%60/g, "'").substring(0, 1024);
-                const fullItemSpecialContainmentProc =
+                var fullItemSpecialContainmentProc =
                   queryResult.ContainmentProcedures.replace(/%60/g, "'");
                 var bigCont = queryResult.ContainmentProcedures.replace(/%60/g, "'").length > 1024;
+                if(bigCont) itemSpecialContainmentProc = itemSpecialContainmentProc.substring(0, itemSpecialContainmentProc.substring(0, 1021).lastIndexOf(" ")) + "...";
 
                 var itemFullFootNotes = queryResult.Footnotes;
                 var itemFootNotes = "";
                 var bigNotes = false;
                 if (queryResult.Footnotes.length <= 1024) {
-                  queryResult.Footnotes;
+                  itemFootNotes = queryResult.Footnotes;
                 } else {
                   bigNotes = true;
                   var footNotes = queryResult.Footnotes.split("\n");
@@ -91,6 +93,13 @@ module.exports = {
                     var popped = footNotes.pop();
                     if (footNotes.join("\n").length <= 1024)
                       itemFootNotes = footNotes.join("\n");
+                  }
+                }
+                if(bigNotes){
+                  if(itemFootNotes.length >= 1024){
+                    itemFootNotes = itemFootNotes.substring(0, 1021) + "...";
+                  } else {
+                    itemFootNotes = itemFootNotes + "\n...";
                   }
                 }
 
@@ -106,7 +115,7 @@ module.exports = {
                     .setTimestamp();
 
                   if (itemNo && itemName)
-                    originalEmbed.setTitle(itemNo + " - " + itemName);
+                    originalEmbed.setTitle(itemNo + " - " + `${itemName}`);
 
                   if (itemUrl) originalEmbed.setURL(itemUrl);
 
@@ -743,34 +752,64 @@ module.exports = {
                         });
                     }
 
-                    var itemDescriptionSegmnt = $(".scp-description > p")
-                      .first()
-                      .contents()
-                      .filter(function () {
-                        return this.type === "text";
-                      })
-                      .text()
-                      .substring(0, 1024);
+                    var itemDescriptionSegmnt = $(".scp-description > p").text().substring(0, 1021);
+                    //console.log($('.scp-description').html().split("\n"))
+                    function format(toFormat){
+                        all = toFormat.html().split("\n")
+                        allNew = [];
+
+                        all.forEach(element => {
+                            if(!element.includes("<h2")){
+                                if(element != "") {
+                                    if(element !== "<ul>") allNew.push(element.replace(/\t/g, ''))
+                                }
+                            }
+                        });
+
+                        finalString = "";
+                        allNew.forEach(element => {
+                            if(element.includes("<p>")) element = `\n${element.replace("<p>", '').replace("</p>", '').replace(/<em>/g, "***").replace(/<\/em>/g, "***")}`;
+                            else if(element.includes("li")) element = `\n  **•** ${element.replace("<li>", '').replace("</li>", '')}`;
+                            else return;
+
+                            if(element.includes("footnoteref")) {
+                                number = element.charAt(element.indexOf("</a></sup>") - 1);
+                                element = element.replace(`<sup class="footnoteref"><a id="footnoteref-${number}" href="javascript:;" class="footnoteref" onclick="WIKIDOT.page.utils.scrollToReference('footnote-${number}')">${number}</a></sup>`, `*${number}*`)
+                            }
+                            
+                            while(element.includes("<strong")){
+                                if(!element.includes("<strong>"))
+                                {
+                                    element = element.replace(element.substring(element.indexOf("<strong"), element.indexOf(">", element.indexOf("<strong")) + 1), '**').replace('</strong>', "**")
+                                } else {
+                                    element = element.replace(`<strong>`, "**").replace(`</strong>`, "**")
+                                }
+                            }
+
+                            finalString += element;
+                        });
+
+                        return finalString;
+                    }
+                    console.log(format($('.scp-description')))
+                    
+                    itemDescriptionSegmnt = itemDescriptionSegmnt.substring(0, itemDescriptionSegmnt.lastIndexOf(" ")) + "..."
                     var fullItemDescriptionSegmnt = $(
                       ".scp-description > p"
                     ).text();
-                    var bigDesc = $(".scp-description > p").length > 1;
+                    var bigDesc = $(".scp-description > p").length > 1024;
+                    if(bigDesc) itemDescriptionSegmnt = itemDescriptionSegmnt.substring(0, itemDescriptionSegmnt.lastIndexOf(" ")) + "..."
 
-                    const itemSpecialContainmentProc = $(
+                    var itemSpecialContainmentProc = $(
                       ".scp-special-containment-procedures > p"
-                    )
-                      .first()
-                      .contents()
-                      .filter(function () {
-                        return this.type === "text";
-                      })
-                      .text()
-                      .substring(0, 1024);
+                    ).text().substring(0, 1021);
+
                     const fullItemSpecialContainmentProc = $(
                       ".scp-special-containment-procedures > p"
                     ).text();
                     var bigCont =
-                      $(".scp-special-containment-procedures > p").length > 1;
+                      $(".scp-special-containment-procedures > p").text().length > 1024;
+                    if(bigCont) itemSpecialContainmentProc = itemSpecialContainmentProc.substring(0, itemSpecialContainmentProc.lastIndexOf(" ")) + "..."
 
                     switch (url) {
                       case "https://the-scp.foundation/object/scp-001":
@@ -822,6 +861,13 @@ module.exports = {
                         var popped = footNotes.pop();
                         if (footNotes.join("\n").length <= 1024)
                           itemFootNotes = footNotes.join("\n");
+                      }
+                    }
+                    if(bigNotes){
+                      if(itemFootNotes.length >= 1024){
+                        itemFootNotes = itemFootNotes.substring(0, 1021) + "...";
+                      } else {
+                        itemFootNotes = itemFootNotes + "\n...";
                       }
                     }
 
