@@ -148,7 +148,7 @@ module.exports = {
       });
 
       db.connect(function (err) {
-        if (err) throw err;
+        if (err) return console.info(`\x1b[31mFailed\x1b[0m to connect to \x1b[31mdatabase\x1b[0m!\n ${err}`);
         console.info("Database \x1b[32mConnected\x1b[0m!");
       });
 
