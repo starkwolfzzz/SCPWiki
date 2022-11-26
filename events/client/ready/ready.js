@@ -142,7 +142,7 @@ module.exports = {
       var db = mysql.createPool({
         host: host,
         user: "u13_GrpgZwOYe8",
-        password: "BjY^oTsSbRWL5!YABalE5YC+",
+        password: process.env.DB_PASSWORD,
         database: "s13_Main_SCP",
         port: 3306,
       });
