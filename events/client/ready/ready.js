@@ -141,16 +141,24 @@ module.exports = {
 
       var db = mysql.createPool({
         host: host,
-        user: "u13_GrpgZwOYe8",
+        user: "u4_oBPxlJYPXZ",
         password: process.env.DB_PASSWORD,
-        database: "s13_Main_SCP",
+        database: "s4_SCPWiki",
         port: 3306,
       });
 
-      // db.connect(function (err) {
-      //   if (err) return console.info(`\x1b[31mFailed\x1b[0m to connect to \x1b[31mdatabase\x1b[0m!\n ${err}`);
-      //   console.info("Database \x1b[32mConnected\x1b[0m!");
-      // });
+      db.on('connection', function (connection) {
+        console.info("Database \x1b[32mConnected\x1b[0m!");
+        
+        connection.on('error', function (err) {
+          return console.info(`\x1b[31mFailed\x1b[0m to connect to \x1b[31mdatabase\x1b[0m!\n ${err}`);
+        });
+
+        connection.on('close', function (err) {
+          return console.info(`connection to \x1b[31mdatabase\x1b[0m \x1b[31mclosed\x1b[0m!\n ${err}`);
+        });
+
+      });
 
       client.db = db;
     });
