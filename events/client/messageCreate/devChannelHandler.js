@@ -58,7 +58,6 @@ module.exports = {
                 listOfNumbers[i]
               )}`;
               var queryResult = await client.db.awaitQuery(scpQuery);
-              console.log(message.content);
 
               if (queryResult[0]) {
                 console.log(message.content);
