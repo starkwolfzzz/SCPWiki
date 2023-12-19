@@ -37,6 +37,7 @@ module.exports = {
     switch (message.channel.name) {
       case "scp":
         if (message.content.toLowerCase().includes("scp")) {
+          console.log(message.content);
           const channel = message.channel;
           const words = message.content
             .toLowerCase()
