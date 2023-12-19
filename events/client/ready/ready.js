@@ -149,9 +149,7 @@ module.exports = {
       console.log(process.env.DB_PASSWORD);
       console.log(db)
 
-      db.on('connection', function (connection) {
-        console.info("Database \x1b[32mConnected\x1b[0m!");
-        
+      db.on('connection', function (connection) {        
         connection.on('error', function (err) {
           return console.info(`\x1b[31mFailed\x1b[0m to connect to \x1b[31mdatabase\x1b[0m!\n ${err}`);
         });
@@ -161,6 +159,10 @@ module.exports = {
         });
 
       });
+
+      db.getConnection(connection => {
+        console.info("Database \x1b[32mConnected\x1b[0m!");
+      })
 
       client.db = db;
     });
