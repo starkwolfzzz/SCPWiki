@@ -146,6 +146,8 @@ module.exports = {
         database: "s4_SCPWiki",
         port: 3306,
       });
+      console.log(process.env.DB_PASSWORD);
+      console.log(db)
 
       db.on('connection', function (connection) {
         console.info("Database \x1b[32mConnected\x1b[0m!");
