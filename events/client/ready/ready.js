@@ -137,7 +137,7 @@ module.exports = {
       if (client.devMode)
         console.info("Development Mode is \x1b[32mEnabled\x1b[0m!");
 
-      var host = client.devMode ? "130.61.140.70" : "172.18.0.1";
+      var host = client.devMode ? "130.61.140.70" : "127.0.0.1";
 
       var db = mysql.createPool({
         host: host,
@@ -149,7 +149,7 @@ module.exports = {
 
       db.on('connection', function (connection) {
         console.info("Database \x1b[32mConnected\x1b[0m!");
-        
+
         connection.on('error', function (err) {
           return console.info(`\x1b[31mFailed\x1b[0m to connect to \x1b[31mdatabase\x1b[0m!\n ${err}`);
         });
