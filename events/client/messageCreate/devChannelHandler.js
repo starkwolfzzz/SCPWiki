@@ -58,8 +58,10 @@ module.exports = {
                 listOfNumbers[i]
               )}`;
               var queryResult = await client.db.awaitQuery(scpQuery);
+              console.log(message.content);
 
               if (queryResult[0]) {
+                console.log(message.content);
                 queryResult = queryResult[0];
                 var itemNo = `SCP-${pad(queryResult.Number, 3)}`;
                 var itemUrl = queryResult.URL;
@@ -106,7 +108,6 @@ module.exports = {
                 const itemTags = queryResult.Tags.split(", ");
                 var bigTags = itemTags.length > 3;
 
-                console.log(message.content);
                 sendMsg();
 
                 async function sendMsg(l = null, rpl = null) {
